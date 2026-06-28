@@ -43,15 +43,23 @@
 
 html, body { margin: 0; padding: 0; }
 
-/* match the forest-green at the top of the wall gradient, so scrolling up /
-   rubber-banding past the top stays green instead of revealing a dark band */
-html { background: #253f34; }
+/* ONE continuous forest gradient for the whole wall, top of page → bottom,
+   on the root element so it spans the full document AND fills the scroll /
+   rubber-band overscroll at both ends — no separate colour blocks */
+html {
+  min-height: 100%;
+  background: linear-gradient(180deg,
+    #2c4a3b 0%,
+    #213d2f 40%,
+    #18302a 72%,
+    #142a20 100%) no-repeat;
+}
 
 body {
   font-family: var(--serif);
   color: var(--cream);
-  background:
-    radial-gradient(120% 80% at 50% -10%, #6b4326 0%, #2c1a10 55%, #1c100a 100%);
+  /* transparent so the root (html) gradient is the single continuous wall */
+  background: transparent;
   min-height: 100vh;
   /* paint the strip above the case with the body's wall gradient instead of
      letting the bookcase's top margin collapse through and expose html's dark

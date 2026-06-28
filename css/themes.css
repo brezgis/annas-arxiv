@@ -218,7 +218,8 @@ body.theme-wallpaper[data-wp="acanthus"][data-wall="walnut"] {
   background: radial-gradient(120% 80% at 50% -10%, #34221a 0%, #1d1009 55%, #100805 100%);
 }
 body.theme-wallpaper[data-wp="acanthus"][data-wall="forest"] {
-  background: radial-gradient(120% 80% at 50% -10%, #29463a 0%, #16291f 55%, #0c1812 100%);
+  /* the forest wall is now the continuous gradient on <html>; keep body clear */
+  background: transparent;
 }
 body.theme-wallpaper[data-wp="acanthus"][data-wall="petrol"] {
   background: radial-gradient(120% 80% at 50% -10%, #2a4d44 0%, #163029 55%, #0c1c17 100%);
