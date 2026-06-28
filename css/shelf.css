@@ -402,6 +402,8 @@ body {
   font-size: .8rem;
   z-index: 2;
   box-shadow: 0 0 0 2px rgba(255,255,255,.6);
+  /* lift the roundel off the band's lower keyline so the α doesn't overlap it */
+  transform: translateY(-7px);
 }
 .cover--penguin .year {
   position: absolute;
