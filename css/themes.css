@@ -1,0 +1,326 @@
+/* ============================================================
+   themes.css — swappable shelf / background treatments
+   Applied via <body class="theme-XXX">. Covers stay identical;
+   only the wood, the case, the wall, and (where needed) text colour change.
+   ============================================================ */
+
+/* shared: a touch of soft contact-shadow under the books, themable */
+.shelf-grid {
+  background-repeat: repeat;
+}
+
+/* ---------- 1 · iBooks (faithful honey oak) ---------- */
+body.theme-ibooks {
+  background:
+    radial-gradient(120% 70% at 50% -10%, #8a5e30 0%, #5e3f20 60%, #3c2814 100%);
+}
+body.theme-ibooks .bookcase {
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, #855a2c 0 88px, #774f26 88px 176px),
+    linear-gradient(180deg, #7c5329, #6a4622);
+  border: 16px solid #452c14;
+  box-shadow: inset 0 0 70px rgba(0,0,0,.5), 0 30px 60px rgba(0,0,0,.45);
+}
+body.theme-ibooks .shelf-grid {
+  background-image:
+    /* soft shadow the books cast onto the board */
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 20px),
+      rgba(0,0,0,.30) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    /* the board: bright front lip, honey face, dark underside groove */
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #f4d79e   calc(var(--row-h) - var(--plank-h)),
+      #d49a54   calc(var(--row-h) - var(--plank-h) + 3px),
+      #bd8440   calc(var(--row-h) - 7px),
+      #5c3a1c   calc(var(--row-h) - 6px),
+      #3a2410   var(--row-h));
+  background-size: 100% var(--row-h);
+}
+
+/* ---------- 2 · Oak (photoreal, Codex-flavoured, lighter) ---------- */
+body.theme-oak {
+  background: radial-gradient(130% 80% at 50% 0%, #c79a5c 0%, #a87c43 55%, #7c5630 100%);
+}
+body.theme-oak .bookcase {
+  background:
+    repeating-linear-gradient(91deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,.04) 2px 6px),
+    linear-gradient(180deg, #c0904f, #a9793c);
+  border: 14px solid #6f4a25;
+  box-shadow: inset 0 0 50px rgba(80,45,15,.4), 0 26px 50px rgba(0,0,0,.4);
+}
+body.theme-oak .shelf-grid {
+  background-image:
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 16px),
+      rgba(60,35,12,.30) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    /* grain on the board face */
+    repeating-linear-gradient(89deg,
+      rgba(255,255,255,.05) 0 3px, rgba(90,55,20,.07) 3px 7px),
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #e7c184 calc(var(--row-h) - var(--plank-h)),
+      #d2a25f calc(var(--row-h) - var(--plank-h) + 4px),
+      #b9883f calc(var(--row-h) - 6px),
+      #7c5226 var(--row-h));
+  background-size: 100% var(--row-h), 100% var(--row-h), 100% var(--row-h);
+}
+
+/* ---------- 3 · Walnut (moody dark, refined original) ---------- */
+body.theme-walnut {
+  background: radial-gradient(120% 80% at 50% -10%, #6b4326 0%, #2c1a10 55%, #170d07 100%);
+}
+body.theme-walnut .bookcase {
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,.06) 2px 5px),
+    linear-gradient(180deg, #3a2417, #241409);
+  border: 14px solid #1c0f07;
+  box-shadow: inset 0 0 70px rgba(0,0,0,.6), 0 30px 60px rgba(0,0,0,.5);
+}
+body.theme-walnut .shelf-grid {
+  background-image:
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 16px),
+      rgba(0,0,0,.4) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #8a5d34 calc(var(--row-h) - var(--plank-h)),
+      #5b3a22 calc(var(--row-h) - var(--plank-h) + 3px),
+      #43291688 calc(var(--row-h) - 6px),
+      #2a1809 var(--row-h));
+  background-size: 100% var(--row-h);
+}
+
+/* ---------- 4 · Birch (light, modern, minimal) ---------- */
+body.theme-birch {
+  background: linear-gradient(180deg, #efe7d8 0%, #e6dccb 100%);
+  color: #3c3026;
+}
+body.theme-birch .wordmark { color: #2f2519; text-shadow: none; }
+body.theme-birch .wordmark .a { color: #c08a2e; }
+body.theme-birch .bookcase {
+  background: linear-gradient(180deg, #f3ecdd, #ece3d1);
+  border: none;
+  box-shadow: none;
+}
+body.theme-birch .shelf-grid {
+  background-image:
+    /* thin soft shelf with a gentle drop shadow — floating plank look */
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 10px),
+      rgba(120,95,60,.18) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #f6efe1 calc(var(--row-h) - var(--plank-h)),
+      #e3d6bf calc(var(--row-h) - var(--plank-h) + 2px),
+      #d8c8ab calc(var(--row-h) - 4px),
+      #c2ad8a var(--row-h));
+  background-size: 100% var(--row-h);
+}
+body.theme-birch .book { filter: drop-shadow(0 8px 9px rgba(90,65,35,.28)); }
+body.theme-birch .legend i { box-shadow: 0 0 0 1px rgba(0,0,0,.1); }
+
+/* ---------- 5 · Painted (deep sage built-in — something else) ---------- */
+body.theme-painted {
+  background: linear-gradient(180deg, #d8cdb6 0%, #c7baa0 100%);
+  color: #34452f;
+}
+body.theme-painted .wordmark { color: #28361f; text-shadow: none; }
+body.theme-painted .wordmark .a { color: #b07a1e; }
+body.theme-painted .bookcase {
+  /* beadboard back + painted frame */
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.05) 0 1px, rgba(0,0,0,.07) 1px 2px, transparent 2px 26px),
+    linear-gradient(180deg, #3f5d4e, #34503f);
+  border: 16px solid #2a4234;
+  box-shadow: inset 0 0 60px rgba(0,0,0,.45), 0 26px 50px rgba(0,0,0,.4);
+}
+body.theme-painted .shelf-grid {
+  background-image:
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 16px),
+      rgba(0,0,0,.30) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #5c7c6b calc(var(--row-h) - var(--plank-h)),
+      #45624f calc(var(--row-h) - var(--plank-h) + 3px),
+      #38503f calc(var(--row-h) - 6px),
+      #243730 var(--row-h));
+  background-size: 100% var(--row-h);
+}
+
+/* ---------- 6 · Wallpaper (William Morris back + wood shelves) ---------- */
+body.theme-wallpaper {
+  background: radial-gradient(120% 80% at 50% -10%, #2c463b 0%, #1b2c25 60%, #101a16 100%);
+}
+body.theme-wallpaper .bookcase {
+  background-image:
+    linear-gradient(180deg, rgba(16,26,22,.12), rgba(16,26,22,.12)),
+    url("../assets/wallpaper.png");
+  background-size: cover, 430px auto;
+  background-repeat: no-repeat, repeat;
+  border: 16px solid #3a2414;
+  box-shadow:
+    inset 0 0 0 1.5px rgba(222,170,108,.3),   /* thin lit keyline on the inner perimeter */
+    inset 0 0 70px rgba(0,0,0,.55),
+    0 30px 60px rgba(0,0,0,.45);
+}
+/* wallpaper variants — swapped via body[data-wp] */
+body.theme-wallpaper[data-wp="midnight"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(8,12,26,.14), rgba(8,12,26,.14)), url("../assets/wp-midnight.png");
+}
+body.theme-wallpaper[data-wp="cream"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(60,50,30,.06), rgba(60,50,30,.06)), url("../assets/wp-cream.png");
+}
+body.theme-wallpaper[data-wp="oxblood"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(30,8,8,.12), rgba(30,8,8,.12)), url("../assets/wp-oxblood.png");
+}
+body.theme-wallpaper[data-wp="birds"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(8,16,26,.10), rgba(8,16,26,.10)), url("../assets/wp-birds.png");
+}
+
+/* --- genuine public-domain scans (Met CC0 + Wikimedia PD) --- */
+/* Morris "Pink and Rose", ca.1890, The Met (CC0) */
+body.theme-wallpaper[data-wp="pinkrose"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(40,30,16,.10), rgba(40,30,16,.14)), url("../assets/wp-pd-pinkrose.png");
+  background-size: cover, 360px auto;
+}
+/* ============================================================
+   Acanthus — the chosen pattern. Thin dark-wood frame (the
+   original wallpaper-theme border), on a configurable surround
+   "wall" (?wall= / data-wall). Default wall: forest green.
+   ============================================================ */
+body.theme-wallpaper[data-wp="acanthus"] .bookcase {
+  background-image:
+    linear-gradient(180deg, rgba(30,24,10,.12), rgba(30,24,10,.16)),
+    url("../assets/wp-pd-acanthus.png");
+  background-size: cover, 480px auto;
+}
+
+/* ---- surround "walls" behind the Acanthus case ---- */
+/* whole page becomes a honey-oak wood-panelled room */
+body.theme-wallpaper[data-wp="acanthus"][data-wall="honeywood"] {
+  background:
+    repeating-linear-gradient(92deg, rgba(255,255,255,.03) 0 3px, rgba(50,30,10,.08) 3px 10px),
+    linear-gradient(180deg, #a4763a 0%, #8a6230 45%, #6f4d25 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="espresso"] {
+  background: radial-gradient(120% 80% at 50% -10%, #3c2716 0%, #20140a 55%, #110a04 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="walnut"] {
+  background: radial-gradient(120% 80% at 50% -10%, #34221a 0%, #1d1009 55%, #100805 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="forest"] {
+  background: radial-gradient(120% 80% at 50% -10%, #29463a 0%, #16291f 55%, #0c1812 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="petrol"] {
+  background: radial-gradient(120% 80% at 50% -10%, #2a4d44 0%, #163029 55%, #0c1c17 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="oxblood"] {
+  background: radial-gradient(120% 80% at 50% -10%, #4a1e1c 0%, #2a0f10 55%, #160708 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="charcoal"] {
+  background: radial-gradient(120% 80% at 50% -10%, #2b2622 0%, #181410 55%, #0c0a08 100%);
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="slate"] {
+  background: radial-gradient(120% 80% at 50% -10%, #36465a 0%, #1f2b38 55%, #111921 100%);
+}
+/* a light, gallery-like ecru wall — needs darker masthead text */
+body.theme-wallpaper[data-wp="acanthus"][data-wall="parchment"] {
+  background: linear-gradient(180deg, #e9dec3 0%, #ddd0b0 100%);
+  color: #3a2c18;
+}
+body.theme-wallpaper[data-wp="acanthus"][data-wall="parchment"] .wordmark { color: #2a1d0c; text-shadow: none; }
+body.theme-wallpaper[data-wp="acanthus"][data-wall="parchment"] .wordmark .a { color: #b07a1e; }
+/* Ottoman ogival silk velvet, ca.1570, The Met (CC0) */
+body.theme-wallpaper[data-wp="ogival"] .bookcase {
+  background-image: linear-gradient(180deg, rgba(20,8,16,.16), rgba(20,8,16,.20)), url("../assets/wp-pd-ogival.png");
+  background-size: cover, 440px auto;
+}
+
+body.theme-wallpaper .shelf-grid {
+  /* honey-wood board floating in front of the wallpaper */
+  background-image:
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h) - 20px),
+      rgba(0,0,0,.38) calc(var(--row-h) - var(--plank-h)),
+      transparent calc(var(--row-h) - var(--plank-h))),
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      #f4d79e calc(var(--row-h) - var(--plank-h)),
+      #d49a54 calc(var(--row-h) - var(--plank-h) + 3px),
+      #bd8440 calc(var(--row-h) - 7px),
+      #5c3a1c calc(var(--row-h) - 6px),
+      #3a2410 var(--row-h));
+  background-size: 100% var(--row-h);
+}
+
+/* ---------- wallpaper sub-switcher (only on wallpaper theme) ---------- */
+.wp-switcher { display: none; }
+body.theme-wallpaper .wp-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+  padding: 8px 12px 0;
+  font-family: var(--sans);
+}
+.wp-switcher button {
+  font: inherit;
+  font-size: .72rem;
+  color: #f3ead5;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.wp-switcher button[aria-pressed="true"] {
+  background: #f3ead5; color: #2a1d05; font-weight: 600; border-color: #f3ead5;
+}
+/* ◦ marks a genuine public-domain museum scan (vs. an original generated tile) */
+.wp-divider {
+  width: 1px; align-self: stretch; margin: 2px 4px;
+  background: rgba(255,255,255,.18);
+}
+
+/* ---------- theme switcher bar ---------- */
+.switcher {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px;
+  background: rgba(20,12,6,.55);
+  backdrop-filter: blur(6px);
+  font-family: var(--sans);
+}
+.switcher button {
+  font: inherit;
+  font-size: .8rem;
+  letter-spacing: .02em;
+  color: #f3ead5;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.switcher button:hover { background: rgba(255,255,255,.18); }
+.switcher button[aria-pressed="true"] {
+  background: var(--c-delight);
+  color: #2a1d05;
+  border-color: var(--c-delight);
+  font-weight: 600;
+}

@@ -1,0 +1,674 @@
+/* ============================================================
+   annas-arxiv  ·  a Penguin-Classics shelf for papers & things
+   ============================================================ */
+
+:root {
+  /* shelf geometry — change --cover-w and everything scales */
+  --cover-w: 172px;
+  --cover-h: 275px;
+  --book-gap-top: 52px;          /* breathing room above each book */
+  --book-gap-x: 38px;            /* breathing room left/right between books */
+  --plank-h: 34px;               /* thickness of the wooden shelf (chunkier, iBooks-like) */
+  --row-h: calc(var(--cover-h) + var(--book-gap-top) + var(--plank-h));
+
+  /* wood */
+  --wood-back: #3a2417;
+  --wood-back-2: #2c1a10;
+  --plank: #5b3a22;
+  --plank-hi: #7a512f;
+  --plank-lo: #3f2613;
+
+  /* paper / penguin cream */
+  --cream: #f1e7cf;
+  --cream-edge: #e4d8ba;
+  --ink: #1c1813;
+
+  /* the original Penguin colour code, by field */
+  --c-linguistics: #e35200;   /* orange  — general */
+  --c-semantics:   #1f7a46;   /* green   — crime/sci */
+  --c-nlp:         #b02a55;   /* cerise  — travel */
+  --c-philosophy:  #1d4e7a;   /* blue    — biography */
+  --c-logic:       #5a3a86;   /* purple  — essays */
+  --c-topology:    #1f7a8c;   /* teal    — topology / TDA */
+  --c-psychology:  #6e2f5b;   /* plum    — psychology */
+  --c-reference:   #6c6258;   /* grey    — world affairs */
+  --c-delight:     #efb700;   /* yellow  — misc */
+  --c-place:       #b6603a;   /* terracotta */
+
+  --serif: "Source Serif 4", Georgia, serif;
+  --sans:  "Inter", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+/* match the forest-green at the top of the wall gradient, so scrolling up /
+   rubber-banding past the top stays green instead of revealing a dark band */
+html { background: #253f34; }
+
+body {
+  font-family: var(--serif);
+  color: var(--cream);
+  background:
+    radial-gradient(120% 80% at 50% -10%, #6b4326 0%, #2c1a10 55%, #1c100a 100%);
+  min-height: 100vh;
+  /* paint the strip above the case with the body's wall gradient instead of
+     letting the bookcase's top margin collapse through and expose html's dark
+     fallback colour */
+  padding-top: 34px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- nameplate: the wordmark on a dark wood band that reads as an
+   extension of the bookcase's top frame ---------- */
+.case-header {
+  /* the SAME dark wood as the case border (#241409), bled out past the
+     horizontal padding and up to the top border — so it reads as the single
+     top frame-piece simply made taller to seat the title, not a second band */
+  margin: 0 -26px 0;
+  padding: 20px 26px 22px;
+  text-align: center;
+  background: #241409;
+  /* a carved lower lip: thin lit wood line (matching the frame's inner
+     keyline) over a soft shadow, so the nameplate reads as an inset panel */
+  border-bottom: 1.5px solid rgba(222,170,108,.35);
+  box-shadow: 0 3px 6px rgba(0,0,0,.45);
+  position: relative;
+  z-index: 1;
+}
+.wordmark {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+  margin: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  /* engraved into the wood: a muted wood-gold fill, a dark shadow biting the
+     upper inner edge of each stroke, and a faint lit lower lip below it */
+  color: #d6bd8c;
+  text-shadow:
+    0 -1px 1px rgba(0,0,0,.6),
+    0 1px 0 rgba(255,238,205,.18),
+    0 2px 4px rgba(0,0,0,.35);
+}
+/* the signature letter: a gold alpha, set EXACTLY like the spine roundels —
+   Source Serif 4, upright (not italic) — so the wordmark α and the branded-book
+   α are the same glyph. Given a warm backlit glow, as if lit from behind. */
+.wordmark .a {
+  color: #e6b73a;            /* brighter gold so the glow reads */
+  font-style: normal;
+  animation: alphaPulse 3.4s ease-in-out infinite;
+}
+/* a gentle backlit breathing, dim → bright → dim */
+@keyframes alphaPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 5px rgba(245,196,40,.5),
+      0 0 12px rgba(245,196,40,.28),
+      0 1px 1px rgba(0,0,0,.4);
+  }
+  50% {
+    text-shadow:
+      0 0 9px rgba(245,196,40,.95),
+      0 0 20px rgba(245,196,40,.62),
+      0 0 34px rgba(245,196,40,.34),
+      0 1px 1px rgba(0,0,0,.4);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wordmark .a { animation: none;
+    text-shadow: 0 0 8px rgba(245,196,40,.7), 0 0 16px rgba(245,196,40,.4), 0 1px 1px rgba(0,0,0,.4); }
+}
+
+/* a calligraphic swash flourish (a drawn texture, not a glyph) flanking the
+   title, mirrored on each side and centred on the line with the title + button */
+.wordmark::before,
+.wordmark::after {
+  content: "";
+  display: inline-block;
+  width: 1.3em;
+  height: .52em;
+  vertical-align: -.04em;           /* dropped to sit on the letters' midline */
+  opacity: .92;
+  background: center/contain no-repeat
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30'><path fill='%23f6ecd2' d='M7 20C19 6 35 6 51 15C65 23 80 23 94 10C86 20 68 19 51 12C35 5 19 7 9 19C6 21 5 22 7 20Z'/></svg>");
+}
+.wordmark::before { margin-right: .54em; }
+.wordmark::after  { margin-left: .54em; transform: scaleX(-1); }
+
+/* ---------- help button + colour-key popover (top-right of the nameplate) ---------- */
+.help {
+  position: absolute;
+  top: 50%;
+  right: 54px;                /* nudged inboard from the corner */
+  transform: translateY(-50%);
+}
+/* a raised, brass-y skeuomorphic button */
+.help-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(120,82,38,.65);
+  background: linear-gradient(180deg, #f6e8c6 0%, #e6cd93 52%, #cba966 100%);
+  color: #5a3a16;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.18rem;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.5),
+    inset 0 1px 1px rgba(255,255,255,.85),
+    inset 0 -2px 3px rgba(120,78,28,.4);
+  transition: background .12s ease, box-shadow .12s ease, transform .1s ease;
+}
+/* hover/focus: darken and sink in, so the affordance reads without the cursor */
+.help-dot:hover,
+.help:focus-within .help-dot {
+  background: linear-gradient(180deg, #d8bd84 0%, #bd9a5a 55%, #a07f44 100%);
+  color: #3f2a0e;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.4),
+    inset 0 2px 5px rgba(74,46,16,.55),
+    inset 0 -1px 1px rgba(255,255,255,.3);
+}
+/* active: fully pressed in */
+.help-dot:active {
+  transform: translateY(1px);
+  background: linear-gradient(180deg, #c2a76e 0%, #a58246 60%, #8a6a37 100%);
+  box-shadow:
+    inset 0 2px 6px rgba(56,35,10,.65),
+    inset 0 -1px 1px rgba(255,255,255,.18);
+}
+.tagline {
+  font-style: italic;
+  opacity: .8;
+  margin: .5em auto 0;
+  max-width: 40ch;
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+.disclaimer {
+  font-family: var(--sans);
+  font-size: .72rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .45;
+  margin-top: 1.1em;
+}
+
+/* ---------- the bookcase ---------- */
+.bookcase {
+  /* scale with the window: ~3vw of green wall on each side, up to a cap. wider
+     windows fit more columns (the grid auto-fills), narrower ones fewer */
+  width: min(1700px, 94vw);
+  margin: 0 auto 78px;   /* top room now lives on body padding (see above) */
+  padding: 0 26px 40px;
+  /* warm vertical back-panel with faint grain */
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.015) 0 2px,
+      rgba(0,0,0,.04) 2px 4px),
+    linear-gradient(180deg, var(--wood-back), var(--wood-back-2));
+  border: 14px solid #241409;
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,.55),
+    0 30px 60px rgba(0,0,0,.45);
+}
+
+.shelf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--cover-w), 1fr));
+  grid-auto-rows: var(--row-h);
+  align-items: end;
+  column-gap: var(--book-gap-x);
+  position: relative;          /* anchor the front-rail overlay (::after) */
+  /* one empty shelf row below the last books (the iBooks "room to grow" look):
+     the plank background repeats every --row-h, so an extra row-height of space
+     paints one more empty shelf */
+  padding-bottom: var(--row-h);
+  /* the planks: one wooden bar at the bottom of every row track */
+  background-image:
+    linear-gradient(180deg,
+      transparent calc(var(--row-h) - var(--plank-h)),
+      var(--plank-hi) calc(var(--row-h) - var(--plank-h)),
+      var(--plank)    calc(var(--row-h) - var(--plank-h) + 3px),
+      var(--plank-lo) var(--row-h));
+  background-size: 100% var(--row-h);
+}
+
+/* ---------- a book on the shelf ---------- */
+.book {
+  width: var(--cover-w);
+  height: var(--cover-h);
+  justify-self: center;
+  /* rest fully visible on the shelf board, set back from its front edge */
+  margin-bottom: var(--plank-h);
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .18s ease, box-shadow .18s ease;
+  transform-origin: bottom center;
+  /* a tight contact shadow where the book meets the board + a soft pool, so it
+     reads as standing on the shelf rather than floating in front of it */
+  filter:
+    drop-shadow(0 1px 1px rgba(0,0,0,.55))
+    drop-shadow(0 7px 7px rgba(0,0,0,.45));
+}
+.book:hover {
+  transform: translateY(-10px) rotate(-1deg);
+  z-index: 5;
+}
+.book:focus-visible { outline: 3px solid var(--c-delight); outline-offset: 4px; }
+
+/* the cover itself */
+.cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 2px 4px 4px 2px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  box-shadow:
+    inset 3px 0 0 rgba(0,0,0,.18),       /* spine shadow */
+    inset 6px 0 6px rgba(0,0,0,.08),
+    inset -1px 0 0 rgba(255,255,255,.3);
+  position: relative;
+}
+
+/* inset rectangular keyline frame — the Penguin equivalent of the "thing"
+   books' .idea-frame border, aligned with the bands' double keylines (7% in) */
+.cover--penguin::before {
+  content: "";
+  position: absolute;
+  inset: 6px;                 /* close to the edge, so both band keylines and all
+                                 the text sit INSIDE the framed relief */
+  border: 1px solid rgba(0,0,0,.18);
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 3;
+  /* a faint inner highlight so the frame reads as a pressed keyline, not a print */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+}
+
+/* spine + edge on the Penguin covers — the SAME crisp inset shadow the "thing"
+   books get from .cover, re-applied on top so it shows over the colour bands:
+   a hard grey spine line, a soft falloff, a page-block highlight, and a soft
+   bevel around the whole edge */
+.cover--penguin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 3;
+  box-shadow:
+    inset 3px 0 0 rgba(0,0,0,.22),         /* crisp spine line */
+    inset 7px 0 7px rgba(0,0,0,.10),        /* soft falloff */
+    inset -1px 0 0 rgba(255,255,255,.3),    /* fore-edge page highlight */
+    inset 0 0 0 1px rgba(0,0,0,.08),        /* thin edge keyline all around */
+    inset 0 0 8px rgba(0,0,0,.10);          /* soft inner bevel */
+}
+
+/* ===== PENGUIN CLASSIC (papers) ===== */
+.cover--penguin .band {
+  background: var(--band, var(--c-linguistics));
+  color: #fff;
+  flex: 0 0 23%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+/* the signature double keyline inside each band */
+.cover--penguin .band::before,
+.cover--penguin .band::after {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  height: 1.5px;
+  background: rgba(255,255,255,.85);
+}
+.cover--penguin .band-top::before    { top: 16%; }
+.cover--penguin .band-top::after     { top: 30%; }
+.cover--penguin .band-bottom::before { bottom: 30%; }
+.cover--penguin .band-bottom::after  { bottom: 16%; }
+
+.cover--penguin .series {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: .5rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  z-index: 1;
+  background: var(--band, var(--c-linguistics));
+  padding: 0 6px;
+}
+
+.cover--penguin .panel {
+  flex: 1;
+  background: var(--cream);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 12px;
+  gap: 7px;
+}
+.cover--penguin .title {
+  font-size: .92rem;
+  line-height: 1.12;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.cover--penguin .title--long { font-size: .8rem; line-height: 1.1; }
+.cover--penguin .title--xlong { font-size: .66rem; line-height: 1.12; letter-spacing: 0; }
+.cover--penguin .rule { width: 34px; height: 1.5px; background: var(--ink); opacity: .55; }
+.cover--penguin .author {
+  font-size: .62rem;
+  font-style: italic;
+  margin: 0;
+  opacity: .78;
+}
+
+.cover--penguin .band-bottom .roundel {
+  position: absolute;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--band, var(--c-linguistics));
+  display: grid; place-items: center;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: .8rem;
+  z-index: 2;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.6);
+}
+.cover--penguin .year {
+  position: absolute;
+  right: 9px;
+  font-family: var(--sans);
+  font-size: .52rem;
+  letter-spacing: .1em;
+  z-index: 1;
+  background: var(--band, var(--c-linguistics));
+  padding: 0 3px;
+}
+
+/* ===== GREAT IDEAS (things) — full-colour typographic ===== */
+.cover--idea {
+  background: var(--band, var(--c-delight));
+  color: var(--cream);
+  padding: 16px 14px;
+  justify-content: space-between;
+  border: 6px solid rgba(255,255,255,.0);
+}
+.cover--idea .idea-frame {
+  border: 1.5px solid rgba(255,255,255,.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 10px;
+}
+.cover--idea .series {
+  font-family: var(--sans);
+  font-size: .5rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.cover--idea .title {
+  font-size: 1.18rem;
+  line-height: 1.08;
+  font-weight: 600;
+  margin: 0;
+}
+.cover--idea .author {
+  font-style: italic;
+  font-size: .68rem;
+  opacity: .9;
+  margin: 0;
+}
+
+/* ===== REAL BOOK COVER (photographed) ===== */
+/* these items size to their image, so the wrapper hugs the artwork */
+.book--cover, .book--album, .book--object {
+  width: auto;
+  height: auto;
+}
+.cover--book {
+  position: relative;
+  display: block;
+  width: max-content;
+  height: var(--cover-h);
+  background: transparent;
+  border-radius: 2px 4px 4px 2px;
+  box-shadow: none;
+  overflow: visible;
+}
+.cover--book img {
+  display: block;
+  height: var(--cover-h);
+  width: auto;
+  max-width: calc(var(--cover-w) * 1.35);
+  border-radius: 2px 4px 4px 2px;
+}
+/* spine + edge relief over the photographed cover, matching the Penguins */
+.cover--book::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 3px 0 0 rgba(0,0,0,.28),
+    inset 7px 0 8px rgba(0,0,0,.16),
+    inset -1px 0 0 rgba(255,255,255,.18),
+    inset 0 0 0 1px rgba(0,0,0,.14);
+}
+
+/* ===== ALBUM — square art sitting like a CD ===== */
+.cover--album {
+  --album-side: calc(var(--cover-w) * 1.04);
+  position: relative;
+  width: var(--album-side);
+  height: var(--album-side);
+  background: transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  overflow: visible;
+}
+.cover--album img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  /* jewel-case edge + a diagonal sheen */
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.18),
+    inset 0 0 0 2px rgba(0,0,0,.25);
+}
+.cover--album::after {                 /* glossy case sheen */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 3px;
+  background: linear-gradient(125deg,
+    rgba(255,255,255,.22) 0%,
+    rgba(255,255,255,.05) 18%,
+    rgba(255,255,255,0) 34%);
+}
+/* the silver disc peeking out of the right side of the case */
+.cover--album .album-disc {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--album-side) * -0.17);
+  transform: translateY(-50%);
+  width: calc(var(--album-side) * 0.86);
+  height: calc(var(--album-side) * 0.86);
+  border-radius: 50%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%,
+      #2a2a2e 0 7%, #c9ccd4 7.5% 12%, transparent 12.5%),
+    repeating-conic-gradient(from 0deg,
+      rgba(255,255,255,.10) 0deg 6deg,
+      rgba(120,130,150,.10) 6deg 12deg),
+    radial-gradient(circle at 50% 50%, #d7dbe2 0%, #aeb4c0 55%, #888f9c 100%);
+  box-shadow: 0 4px 8px rgba(0,0,0,.45);
+}
+
+/* ===== OBJECT — a transparent thing standing on the shelf ===== */
+.object-art {
+  display: block;
+  width: auto;
+  height: auto;
+  /* scale to fit within this box, aspect preserved — wide objects bound by
+     width, tall ones by height, all bottom-aligned so they sit on the shelf.
+     width is capped near the column width so wide items don't overlap books */
+  max-height: calc(var(--cover-h) * 0.9);
+  max-width: calc(var(--cover-w) * 1.14);
+}
+/* a photographed CD/jewel case — match the height of the synthetic album CDs */
+.object--cd .object-art {
+  height: calc(var(--cover-w) * 1.04);
+  width: auto;
+  max-height: none;
+  max-width: none;
+}
+
+/* a real quote (or a line of Anna's) shows through as a hover-note */
+.book .note {
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  width: max-content;
+  min-width: 180px;
+  max-width: 280px;
+  background: #fbf4e1;
+  color: #2a2118;
+  font-size: .74rem;
+  line-height: 1.42;
+  font-style: italic;
+  padding: 11px 13px;
+  border-radius: 5px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+  z-index: 10;
+}
+/* the page/source citation, sitting just outside the closing quote */
+.book .note .cite {
+  font-style: normal;
+  opacity: .55;
+  white-space: nowrap;
+  font-size: .92em;
+}
+.book .note::after {
+  content: "";
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #fbf4e1;
+}
+.book:hover .note,
+.book:focus-visible .note { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- colour-key popover (revealed by the help dot) ---------- */
+.legend {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: max-content;
+  max-width: 260px;
+  display: grid;
+  gap: 7px 16px;
+  padding: 14px 16px;
+  background: #fbf4e1;
+  color: #2a2118;
+  border-radius: 6px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.5);
+  font-family: var(--sans);
+  font-size: .76rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .16s ease, transform .16s ease;
+  z-index: 20;
+}
+.help:hover .legend,
+.help:focus-within .legend {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.legend::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  right: 14px;
+  border: 7px solid transparent;
+  border-bottom-color: #fbf4e1;
+}
+.legend-head {
+  margin: 0 0 2px;
+  font-family: var(--serif);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.legend-head a {
+  color: #6a3d12;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(106,61,18,.35);
+}
+.legend-head a:hover { border-bottom-color: rgba(106,61,18,.8); }
+.legend-rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
+}
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; flex: 0 0 auto; }
+.legend-note {
+  margin: 2px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid rgba(0,0,0,.12);
+  font-size: .68rem;
+  line-height: 1.4;
+  opacity: .82;
+}
+.legend-note a { color: #8a5a1e; }
+
+footer {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: .74rem;
+  opacity: .4;
+  padding: 0 20px 50px;
+  line-height: 1.6;
+}
+footer a { color: inherit; }
+
+@media (max-width: 480px) {
+  :root { --cover-w: 132px; --cover-h: 211px; }
+}

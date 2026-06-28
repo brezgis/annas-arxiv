@@ -1,0 +1,216 @@
+{
+  "_comment": "Anna's real shelf. type: paper=Penguin cover · book=real cover image · album=CD art · object=transparent PNG standing on the shelf · thing=typographic cover. note=quote (papers/books) or Anna's line (things/objects), shown in curly quotes. cite=formatted citation outside the quote — ACL style (name, year) for computation, APA style (name, year, p. x) for everything else. field sets the spine colour; objects/albums are field-less.",
+  "items": [
+    {
+      "type": "paper",
+      "title": "Eros and Education",
+      "author": "Joseph J. Schwab",
+      "year": 1954,
+      "field": "socialscience",
+      "link": "assets/pdf/eros-and-education-schwab-1954.pdf",
+      "note": "As an educational doctrine, the isolationist error is exemplified by the dictum that “the aim of man should be to destroy the mammal within us.” It is assumed that the mammal dead can leave the man alive — and better.",
+      "cite": "(Schwab, 1954)"
+    },
+    {
+      "type": "book",
+      "title": "I Am a Strange Loop",
+      "author": "Douglas Hofstadter",
+      "year": 2007,
+      "field": "philosophy",
+      "cover": "assets/covers/strange-loop.jpg",
+      "link": "https://en.wikipedia.org/wiki/I_Am_a_Strange_Loop",
+      "note": "The pressures of daily life require us, force us, to talk about events at the level on which we directly perceive them… we are victims of our macroscopicness, and cannot escape the trap of using everyday words to describe the events that we witness, and perceive as real.",
+      "cite": "(Hofstadter, 2007, p. 63)"
+    },
+    {
+      "type": "paper",
+      "title": "The Shape of Beliefs",
+      "author": "Sarfati, Bigelow, Wurgaft et al.",
+      "year": 2026,
+      "field": "computation",
+      "link": "https://arxiv.org/abs/2602.02315",
+      "note": "Linear separability does not entail geometrically faithful control: features may be linearly separable and readable, yet linear steering can still cut across (rather than along) the curved belief manifold.",
+      "cite": "(Sarfati et al., 2026)"
+    },
+    {
+      "type": "object",
+      "title": "Vietnamese Coffee",
+      "image": "assets/objects/vietnamese-coffee.png",
+      "link": "https://trungnguyen.eu/pages/preparation-of-vietnamese-coffee",
+      "note": "Earthy, bitter, strong, and sweet."
+    },
+    {
+      "type": "paper",
+      "title": "Cultural Scripts: What Are They and What Are They Good For?",
+      "author": "Cliff Goddard",
+      "year": 2004,
+      "field": "linguistics",
+      "link": "https://www.researchgate.net/publication/249939883_Cultural_scripts_What_are_they_and_what_are_they_good_for",
+      "note": "There is no need to begin with a “tutorial” about collectivism vs. individualism, positive vs. negative politeness, high- vs. low-context cultures, or other arcane academic concepts — because cultural scripts “interface” more or less with simple ordinary language.",
+      "cite": "(Goddard, 2004, p. 160)"
+    },
+    {
+      "type": "object",
+      "variant": "cd",
+      "title": "Anna’s Mixtape",
+      "image": "assets/albums/annas-mixtape.png",
+      "link": "https://open.spotify.com/playlist/3y5KxG3tPGYAqUBJ0dWNJW",
+      "note": "I like these songs."
+    },
+    {
+      "type": "paper",
+      "title": "The Effort to Drive the Other Person Crazy",
+      "author": "Harold F. Searles",
+      "year": 1959,
+      "field": "psychology",
+      "link": "https://www.willhall.net/files/SEARLES1959EffortToDriveCrazy.pdf",
+      "note": "The effort to drive the other person crazy can be motivated predominantly by a desire to externalize, and thus get rid of, the threatening craziness in oneself.",
+      "cite": "(Searles, 1959, p. 7)"
+    },
+    {
+      "type": "thing",
+      "title": "The Atlanta BeltLine",
+      "author": "Atlanta, Georgia",
+      "field": "delight",
+      "link": "https://beltline.org/visit/",
+      "note": "My walking spot for 5+ years."
+    },
+    {
+      "type": "paper",
+      "title": "Persistent Homology for High-Dimensional Data Based on Spectral Methods",
+      "author": "Damrich, Berens & Kobak",
+      "year": 2023,
+      "field": "computation",
+      "link": "https://arxiv.org/abs/2311.03087",
+      "note": "Traditional persistent homology becomes very sensitive to noise and fails to detect the correct topology… spectral distances on the k-nearest-neighbour graph — diffusion distance, effective resistance — recover it even amid high-dimensional noise.",
+      "cite": "(Damrich et al., 2023)"
+    },
+    {
+      "type": "book",
+      "title": "Psychoanalysis: The Impossible Profession",
+      "author": "Janet Malcolm",
+      "year": 1981,
+      "field": "psychology",
+      "cover": "assets/covers/janet-malcolm-impossible-profession.jpg",
+      "link": "https://cominsitu.wordpress.com/wp-content/uploads/2018/08/master-work-janet-malcolm-psychoanalysis_-the-impossible-profession-jason-aronson-inc-1977.pdf",
+      "note": "The difference between analysis and life is that in analysis — in this highly artificial, extreme, bizarre, stressful, in some ways awful situation — these infantile fantasies come into higher relief than they do in life, become accessible to study.",
+      "cite": "(Malcolm, 1981, p. 76)"
+    },
+    {
+      "type": "object",
+      "title": "Northern China Eatery",
+      "image": "assets/objects/northern-china-eatery.png",
+      "link": "https://northernchinaeatery.com/",
+      "note": "#1 delicious food item in the world."
+    },
+    {
+      "type": "paper",
+      "title": "The Myth of “the Russian Soul” Through the Mirror of Language",
+      "year": 2009,
+      "field": "linguistics",
+      "link": "https://journals.ku.edu/folklorica/article/view/3818/3656",
+      "note": "It is as though the stereotype keeps reproducing itself in different historical periods and under varying social conditions. Stimulus comes both “from above,” as a national ideology, and “from below,” as a product of people’s own self-perception.",
+      "cite": "(Apresjan, 2009)"
+    },
+    {
+      "type": "album",
+      "title": "В диапазоне между отчаянием и надеждой",
+      "author": "Pornofilmy",
+      "cover": "assets/albums/pornofilmy.jpg",
+      "link": "https://open.spotify.com/album/6qOOpX7g5uEw3NhOgmy3iq",
+      "note": "Правильно думай, правильно чувствуй / Сердцем в могиле, душой в тюрьме / Это Россия, Россия для грустных / Ни выбора, ни перемен / Ни выбора, ни перемен / Здесь!",
+      "cite": "— Россия для грустных"
+    },
+    {
+      "type": "paper",
+      "title": "Hate in the Counter-Transference",
+      "author": "D. W. Winnicott",
+      "year": 1949,
+      "field": "psychology",
+      "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3330380/",
+      "note": "Hate that is justified in the present setting has to be sorted out and kept in storage and available for eventual interpretation.",
+      "cite": "(Winnicott, 1949, p. 351)"
+    },
+    {
+      "type": "thing",
+      "title": "The Minuteman Bikeway",
+      "author": "Greater Boston",
+      "field": "delight",
+      "link": "https://minutemanbikeway.org/",
+      "note": "Beautiful, tree-lined biking trail through greater Boston."
+    },
+    {
+      "type": "paper",
+      "title": "If LLMs Have Human-Like Attributes, Then So Does Age of Empires II",
+      "author": "Adrian de Wynter",
+      "year": 2026,
+      "field": "computation",
+      "link": "https://arxiv.org/abs/2605.31514",
+      "note": "…true anthropomorphic behavior — depending on the view — is not specific to LLMs as entities existing within a computer.",
+      "cite": "(de Wynter, 2026)"
+    },
+    {
+      "type": "object",
+      "title": "Calico Critters Seal Family",
+      "image": "assets/objects/calico-seal-family.png",
+      "link": "https://sylvanianfamilies.fandom.com/wiki/Seal_Family",
+      "note": "Cute!"
+    },
+    {
+      "type": "paper",
+      "title": "Phaedo",
+      "author": "Plato",
+      "year": "c. 360 BCE",
+      "field": "philosophy",
+      "link": "https://classics.mit.edu/Plato/phaedo.html",
+      "note": "Those who practice philosophy in the right way are in training for dying, and they fear death least of all men.",
+      "cite": "(Plato, ca. 360 BCE)"
+    },
+    {
+      "type": "album",
+      "title": "The Front Bottoms",
+      "author": "The Front Bottoms",
+      "cover": "assets/albums/front-bottoms.jpg",
+      "link": "https://open.spotify.com/album/5pCQUIEmbZveYwLmO3Iedv",
+      "note": "And I can hear your dog whistle from my bedroom / And I can see a flashlight cutting up the trees behind my house"
+    },
+    {
+      "type": "paper",
+      "title": "Symmetric Divergence and Normalized Similarity",
+      "author": "Wang, Hu et al.",
+      "year": 2026,
+      "field": "computation",
+      "link": "https://arxiv.org/abs/2606.06342",
+      "note": "For general similarity analysis — across layers, models, datasets, or pipelines — the reliance on summing barcode lengths introduces fundamental limitations.",
+      "cite": "(Wang et al., 2026)"
+    },
+    {
+      "type": "paper",
+      "title": "Discovering Dąbrowski’s Theory",
+      "author": "Michael M. Piechowski",
+      "year": 2008,
+      "field": "psychology",
+      "link": "https://dabrowskicenter.org/wp-content/uploads/2022/10/Piechowski-2008.pdf",
+      "note": "As a neurologist, he firmly believed that as a person achieves higher levels of development, corresponding changes take place in the nervous system.",
+      "cite": "(Piechowski, 2008, p. 43)"
+    },
+    {
+      "type": "thing",
+      "title": "Cadore",
+      "author": "Buenos Aires",
+      "field": "delight",
+      "link": "https://share.google/CsV6DY2MV74bfSsUg",
+      "note": "I went here almost every day for three weeks when I was in BA."
+    },
+    {
+      "type": "paper",
+      "title": "Standing Bottles, Washing Deals, and Drinking “for the Soul”",
+      "author": "Dale Pesmen",
+      "year": 2000,
+      "field": "socialscience",
+      "link": "https://share.google/bksqhT7AEUqG8PCRb",
+      "note": "The image of miracles in Russian culture is, I believe, tremendously rich… when refrigerators become sheepskin coats, the mediating element is what is called sistema, the “system,” in which bottles are one of many players.",
+      "cite": "(Pesmen, 2000, p. 69)"
+    }
+  ]
+}

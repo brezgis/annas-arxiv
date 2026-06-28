@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna&rsquo;s ArXiv</title>
+  <meta name="description" content="Anna's ArXiv — a little shelf of papers (and things) Anna loves.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400;1,8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shelf.css">
+  <link rel="stylesheet" href="css/themes.css">
+</head>
+<body class="theme-wallpaper">
+
+  <main class="bookcase">
+    <header class="case-header">
+      <h1 class="wordmark">Ann<span class="a">&#945;</span>&rsquo;s ArXiv</h1>
+      <div class="help">
+        <button class="help-dot" type="button" aria-label="What do the spine colours mean?">?</button>
+        <div class="legend" role="tooltip">
+          <p class="legend-head">
+            <a href="https://countryhouselibrary.co.uk/blogs/our-seasonal-book-selections/what-do-the-colours-of-penguin-books-mean"
+               target="_blank" rel="noopener">Penguin-inspired colour code&nbsp;&#8599;</a>
+          </p>
+          <div class="legend-rows"></div>
+          <p class="legend-note">
+            Wallpaper:
+            <a href="https://commons.wikimedia.org/wiki/File:Sidewall_(USA),_1875%E2%80%9399_(CH_18615677).jpg"
+               target="_blank" rel="noopener">Sidewall</a>,
+            USA, 1875&ndash;99 — a Morris-style acanthus &amp; tulip print.
+            Cooper Hewitt, public domain via Wikimedia Commons.
+          </p>
+        </div>
+      </div>
+    </header>
+    <div class="shelf-grid" aria-label="bookshelf"></div>
+  </main>
+
+  <script src="js/shelf.js"></script>
+  <script>
+    // Locked-in look: Acanthus wallpaper · thin dark frame · forest-green wall.
+    // (?bg= / ?wp= / ?wall= still override, for previewing other treatments.)
+    (function () {
+      const params = new URLSearchParams(location.search);
+      document.body.className = params.get("bg") || "theme-wallpaper";
+      document.body.dataset.wp = params.get("wp") || "acanthus";
+      document.body.dataset.wall = params.get("wall") || "forest";
+    })();
+  </script>
+</body>
+</html>

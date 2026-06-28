@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# dev scripts & scratch (contain personal email in User-Agent strings, or are
+# one-off helpers — not part of the shipped site)
+add.sh
+fetch_pd.py
+fetch_pd2.py
+fetch_commons.py
+board.html
+gallery.html
+wordmark-fonts.html
+/covers/
+
+# raw public-domain source scans used while curating the wallpaper (large,
+# unused by the site — provenance lives in the popover credit instead)
+assets/pd/
+
+# local headless-preview chrome profile, if any
+.chrome/
