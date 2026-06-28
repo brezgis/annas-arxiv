@@ -53,6 +53,11 @@ html {
     #213d2f 40%,
     #18302a 72%,
     #142a20 100%) no-repeat;
+  /* paint the gradient's own end-colour on the canvas too, so the rubber-band /
+     overscroll region past the bottom of the page stays forest-green instead of
+     flashing white; and stop the scroll from chaining past the page at all */
+  background-color: #142a20;
+  overscroll-behavior: none;
 }
 
 body {
@@ -212,9 +217,10 @@ body {
 
 /* ---------- the bookcase ---------- */
 .bookcase {
-  /* scale with the window: ~3vw of green wall on each side, up to a cap. wider
-     windows fit more columns (the grid auto-fills), narrower ones fewer */
-  width: min(1700px, 94vw);
+  /* scale with the window: a wider band of green wall on each side, up to a cap.
+     wider windows fit more columns (the grid auto-fills), narrower ones fewer;
+     at the smallest sizes it collapses to a single column of shelves */
+  width: min(1500px, 90vw);
   margin: 0 auto 78px;   /* top room now lives on body padding (see above) */
   padding: 0 26px 40px;
   /* warm vertical back-panel with faint grain */
@@ -261,7 +267,9 @@ body {
   position: relative;
   text-decoration: none;
   color: inherit;
-  transition: transform .18s ease, box-shadow .18s ease;
+  /* z-index drops 0.2s AFTER un-hover (not instantly), so the bubble stays in
+     front of the nameplate/border while it fades out instead of slipping behind */
+  transition: transform .18s ease, box-shadow .18s ease, z-index 0s .2s;
   transform-origin: bottom center;
   /* a tight contact shadow where the book meets the board + a soft pool, so it
      reads as standing on the shelf rather than floating in front of it */
@@ -272,6 +280,7 @@ body {
 .book:hover {
   transform: translateY(-10px) rotate(-1deg);
   z-index: 5;
+  transition-delay: 0s;   /* elevate immediately on hover; the delay only applies on the way out */
 }
 .book:focus-visible { outline: 3px solid var(--c-delight); outline-offset: 4px; }
 
