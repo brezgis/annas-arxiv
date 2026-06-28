@@ -64,7 +64,7 @@ function thingCover(it) {
 function bookCover(it) {
   return `
     <div class="cover cover--book">
-      <img src="${esc(it.cover)}" alt="${esc(it.title)} — cover" loading="lazy">
+      <img src="${esc(it.cover)}" alt="${esc(it.title)} — cover" loading="lazy" decoding="async">
     </div>`;
 }
 
@@ -73,16 +73,16 @@ function albumCover(it) {
   return `
     <div class="cover cover--album">
       <span class="album-disc" aria-hidden="true"></span>
-      <img src="${esc(it.cover)}" alt="${esc(it.title)} — album art" loading="lazy">
+      <img src="${esc(it.cover)}" alt="${esc(it.title)} — album art" loading="lazy" decoding="async">
     </div>`;
 }
 
 /* ----- a transparent object standing on the shelf ----- */
 function objectArt(it) {
-  return `<img class="object-art" src="${esc(it.image)}" alt="${esc(it.title)}" loading="lazy">`;
+  return `<img class="object-art" src="${esc(it.image)}" alt="${esc(it.title)}" loading="lazy" decoding="async">`;
 }
 
-function bookEl(it) {
+function bookEl(it, i = 0) {
   const tag = it.link ? "a" : "div";
   const href = it.link ? ` href="${esc(it.link)}" target="_blank" rel="noopener"` : "";
   let inner, mod = "";
@@ -93,7 +93,8 @@ function bookEl(it) {
     case "thing":  inner = thingCover(it);                       break;
     default:       inner = paperCover(it);
   }
-  return `<${tag} class="book ${mod}"${href} tabindex="0">${inner}${noteHTML(it)}</${tag}>`;
+  // --i drives the staggered fall-in delay (see .book animation in shelf.css)
+  return `<${tag} class="book ${mod}"${href} tabindex="0" style="--i:${i}">${inner}${noteHTML(it)}</${tag}>`;
 }
 
 /* the hover bubble: a real text quote (papers/books) gets curly quotes + the

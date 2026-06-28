@@ -284,6 +284,22 @@ body {
 }
 .book:focus-visible { outline: 3px solid var(--c-delight); outline-offset: 4px; }
 
+/* staggered "fall-in" entrance, matching the rise-and-fade (navEnter) used across
+   brezgis.com — so on load the shelf settles in gracefully instead of every book
+   popping in at once. --i (set per book in shelf.js) staggers the start; the fill
+   is `backwards` (not forwards) so the finished state reverts to the normal rules
+   and the :hover lift keeps working */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes bookFallIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .book {
+    animation: bookFallIn .5s ease backwards;
+    animation-delay: calc(var(--i, 0) * .045s);
+  }
+}
+
 /* the cover itself */
 .cover {
   width: 100%;
