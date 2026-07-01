@@ -300,6 +300,14 @@ body {
   }
 }
 
+/* the typographic books are size containers, so their cover's inner type AND the
+   cover's own box (padding/border) scale with the cover WIDTH via cqw units —
+   pixel-identical at the 172px desktop size, gracefully proportional at ~70px on
+   phones. It must be the .book (not the .cover): an element's own cqw resolves
+   against an ANCESTOR container, so the cover--idea box needs .book above it.
+   Image-based books are excluded — they size to their artwork, not a fixed width. */
+.book:not([class*="book--"]) { container-type: inline-size; }
+
 /* the cover itself */
 .cover {
   width: 100%;
@@ -321,7 +329,7 @@ body {
 .cover--penguin::before {
   content: "";
   position: absolute;
-  inset: 6px;                 /* close to the edge, so both band keylines and all
+  inset: 3.5cqw;              /* close to the edge, so both band keylines and all
                                  the text sit INSIDE the framed relief */
   border: 1px solid rgba(0,0,0,.18);
   border-radius: 1px;
@@ -378,12 +386,12 @@ body {
 .cover--penguin .series {
   font-family: var(--sans);
   font-weight: 600;
-  font-size: .5rem;
+  font-size: 4.65cqw;
   letter-spacing: .22em;
   text-transform: uppercase;
   z-index: 1;
   background: var(--band, var(--c-linguistics));
-  padding: 0 6px;
+  padding: 0 3.5cqw;
 }
 
 .cover--penguin .panel {
@@ -395,21 +403,21 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px 12px;
-  gap: 7px;
+  padding: 5.8cqw 7cqw;
+  gap: 4cqw;
 }
 .cover--penguin .title {
-  font-size: .92rem;
+  font-size: 8.56cqw;
   line-height: 1.12;
   font-weight: 600;
   margin: 0;
   letter-spacing: -0.01em;
 }
-.cover--penguin .title--long { font-size: .8rem; line-height: 1.1; }
-.cover--penguin .title--xlong { font-size: .66rem; line-height: 1.12; letter-spacing: 0; }
-.cover--penguin .rule { width: 34px; height: 1.5px; background: var(--ink); opacity: .55; }
+.cover--penguin .title--long { font-size: 7.44cqw; line-height: 1.1; }
+.cover--penguin .title--xlong { font-size: 6.14cqw; line-height: 1.12; letter-spacing: 0; }
+.cover--penguin .rule { width: 19.8cqw; height: 1.5px; background: var(--ink); opacity: .55; }
 .cover--penguin .author {
-  font-size: .62rem;
+  font-size: 5.77cqw;
   font-style: italic;
   margin: 0;
   opacity: .78;
@@ -417,37 +425,37 @@ body {
 
 .cover--penguin .band-bottom .roundel {
   position: absolute;
-  width: 26px; height: 26px;
+  width: 15.1cqw; height: 15.1cqw;
   border-radius: 50%;
   background: var(--cream);
   color: var(--band, var(--c-linguistics));
   display: grid; place-items: center;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: .8rem;
+  font-size: 7.44cqw;
   z-index: 2;
   box-shadow: 0 0 0 2px rgba(255,255,255,.6);
   /* lift the roundel off the band's lower keyline so the α doesn't overlap it */
-  transform: translateY(-7px);
+  transform: translateY(-4.07cqw);
 }
 .cover--penguin .year {
   position: absolute;
-  right: 9px;
+  right: 5.2cqw;
   font-family: var(--sans);
-  font-size: .52rem;
+  font-size: 4.84cqw;
   letter-spacing: .1em;
   z-index: 1;
   background: var(--band, var(--c-linguistics));
-  padding: 0 3px;
+  padding: 0 1.74cqw;
 }
 
 /* ===== GREAT IDEAS (things) — full-colour typographic ===== */
 .cover--idea {
   background: var(--band, var(--c-delight));
   color: var(--cream);
-  padding: 16px 14px;
+  padding: 9.3cqw 8.1cqw;
   justify-content: space-between;
-  border: 6px solid rgba(255,255,255,.0);
+  border: 3.5cqw solid rgba(255,255,255,.0);
 }
 .cover--idea .idea-frame {
   border: 1.5px solid rgba(255,255,255,.6);
@@ -455,24 +463,24 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 12px 10px;
+  padding: 7cqw 5.8cqw;
 }
 .cover--idea .series {
   font-family: var(--sans);
-  font-size: .5rem;
+  font-size: 4.65cqw;
   letter-spacing: .2em;
   text-transform: uppercase;
   opacity: .85;
 }
 .cover--idea .title {
-  font-size: 1.18rem;
+  font-size: 10.98cqw;
   line-height: 1.08;
   font-weight: 600;
   margin: 0;
 }
 .cover--idea .author {
   font-style: italic;
-  font-size: .68rem;
+  font-size: 6.33cqw;
   opacity: .9;
   margin: 0;
 }
@@ -705,5 +713,50 @@ footer {
 footer a { color: inherit; }
 
 @media (max-width: 480px) {
-  :root { --cover-w: 132px; --cover-h: 211px; }
+  :root {
+    /* ~4 books per shelf on a typical phone (3 on very narrow ones). Covers stay
+       crisp at this size because their internals scale with cover width (cqw). */
+    --cover-w: 70px;
+    --cover-h: 112px;
+    --book-gap-x: 11px;
+    --book-gap-top: 24px;
+    --plank-h: 18px;
+  }
+
+  /* give the shelves the width: use more of the screen and trim the heavy frame */
+  body { padding-top: 22px; }
+  .bookcase {
+    width: 96vw;
+    padding: 0 10px 24px;
+    border-width: 9px;
+  }
+  /* the nameplate band still bleeds out to the (now-thinner) bookcase padding edge */
+  .case-header {
+    margin: 0 -10px;
+    padding: 14px 12px 16px;
+  }
+  /* title stays on one line and clears the help button */
+  .wordmark {
+    font-size: clamp(1.35rem, 6vw, 1.9rem);
+    white-space: nowrap;
+  }
+  /* keep the swash flourishes on phones, just scaled down and tucked closer to the
+     title so the whole wordmark still clears the corner help button */
+  .wordmark::before,
+  .wordmark::after { width: 1em; height: .42em; }
+  .wordmark::before { margin-right: .3em; }
+  .wordmark::after  { margin-left: .3em; }
+  /* help dot tucked into the corner, clear of the centred title */
+  .help { right: 8px; }
+
+  /* the hover-notes are a pointer affordance (no hover on touch) and, being
+     180–280px wide and centred over ~70px books, they stick out past the screen
+     edge and force the layout viewport to zoom out. Drop them on phones. */
+  .book .note { display: none; }
+}
+
+/* below ~360px there isn't room for the flourishes beside the corner help button */
+@media (max-width: 359px) {
+  .wordmark::before,
+  .wordmark::after { display: none; }
 }
