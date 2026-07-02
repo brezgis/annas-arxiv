@@ -89,7 +89,7 @@ function bookEl(it, i = 0) {
   switch (it.type) {
     case "book":   inner = bookCover(it);  mod = "book--cover";  break;
     case "album":  inner = albumCover(it); mod = "book--album";  break;
-    case "object": inner = objectArt(it);  mod = "book--object" + (it.variant ? " object--" + it.variant : ""); break;
+    case "object": inner = objectArt(it);  mod = "book--object" + (it.variant ? " object--" + esc(it.variant) : ""); break;
     case "thing":  inner = thingCover(it);                       break;
     default:       inner = paperCover(it);
   }
@@ -131,6 +131,7 @@ async function build() {
   let data;
   try {
     const res = await fetch("items.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     data = await res.json();
   } catch (e) {
     grid.innerHTML = `<p style="grid-column:1/-1;opacity:.6">Couldn't load items.json — ${esc(e.message)}</p>`;
