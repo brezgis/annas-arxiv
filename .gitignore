@@ -1,8 +1,7 @@
 # macOS
 .DS_Store
 
-# dev scripts & scratch (contain personal email in User-Agent strings, or are
-# one-off helpers — not part of the shipped site)
+# dev scripts & scratch — one-off local helpers, not part of the shipped site
 add.sh
 fetch_pd.py
 fetch_pd2.py
